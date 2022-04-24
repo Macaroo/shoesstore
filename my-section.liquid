@@ -1,0 +1,57 @@
+<div class="page-width">
+  <h2>
+    {{ section. settings.title }}
+  </h2>
+  <ul class="grid my-grid">
+    {% for block in section.blocks %}
+      <li>
+        {% if block.settings.block_image %}
+          {{ block.settings.block_image | img_url: '300x' | img_tag }}
+        {% endif %}
+        <p>{{ block.settings.block_text }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+  .my-grid {
+    justify-content: space-between;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "マイセクション",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "画像付きテキスト",
+      "type": "text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "ブロック画像"
+        },
+        {
+          "type": "text",
+          "id": "block_text",
+          "label": "ブロックテキスト"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "マイセクション"
+    }
+  ]
+}
+{% endschema %}
